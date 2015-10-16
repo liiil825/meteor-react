@@ -1,0 +1,62 @@
+.page-container
+  background-color: $color-container
+
+.plan-new-container
+  form
+    width: 210px
+    margin: 30px auto 40px
+
+  .input-plan-new
+    width: 210px
+    height: 30px
+    border-radius: 5px
+
+  .form-new-plan
+    position: relative
+
+.plan-new-icons
+  position: absolute
+  right: 0px
+  top: 0px
+
+  &.l-show
+    background-color: $color-dark1
+
+
+  input[type=radio]
+    display: none
+
+  li
+    padding: 8px
+
+  .fa-plus-circle
+    font-size: $heading-size3
+    color: $color-bright1
+    &:hover
+      color: lighten($color-bright1, 30)
+  .fa-search
+    font-size: $heading-size3
+    color: $color-bright1
+    &:hover
+      color: lighten($color-bright1, 30)
+.page-plan-items
+  l-clearfix()
+  li
+    width: 210px
+    margin-left: 55px
+    float: left
+
+@media screen and (min-width: 640px)
+  .plan-new-container
+    form
+      width: 420px
+    .input-plan-new
+      width: 420px
+  .page-plan-items
+    li
+      margin-left: 40px
+      width: 420px
+
+@media screen and (min-width: 960px)
+  .page-container
+    l-center()

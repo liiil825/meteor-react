@@ -101,7 +101,6 @@ Option = React.createClass({
               data = data.list
                               ? data.list[item - 1]
                               : data[item - 1].list;
-              console.log( data );
             })()
             return this.dataToSelect(data);
           }.bind(this));

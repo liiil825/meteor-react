@@ -1,0 +1,50 @@
+l-container($pageWidth = $page-width, $marginTop = 0, $marginBottom = 0, $minWidth = 0)
+  if $minWidth == 0
+    width: $pageWidth
+  else
+    min-width: $pageWidth
+  margin: $marginTop auto $marginBottom
+
+l-clearfix()
+  *zoom: 1
+
+  &:before,
+  &:after
+    content: " "
+    display: table
+
+  &:after
+    clear: both
+
+l-inline($isFloat = 1)
+  > li
+    if $isFloat == 1
+      float: left
+    else
+      display: inline-block
+      *display: inline
+
+.l-cf
+  l-clearfix()
+
+.l-left
+  float: left
+
+.l-right
+  float: right
+
+.l-inline
+  l-inline()
+  l-clearfix()
+
+l-center()
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate3d(-50%, -50%, 0)
+
+.l-hidden
+  display: none
+  width: 0
+  height: 0
+

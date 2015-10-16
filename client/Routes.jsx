@@ -7,13 +7,11 @@ const {
 const browserHistory = history.createHistory();
 
 Routes = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
   render: function () {
     return (
       <Router history={browserHistory}>
         <Route component={App}>
+          <Route name="plan" path="plans" component={TodoPage}/>
           <Route name="test" path="test" component={Test}/>
           <Route name="option" path="option" component={Option}/>
           <Route name="dialog" path="dialog" component={Dialog}/>
@@ -22,9 +20,13 @@ Routes = React.createClass({
           <Route name="join" path="/join" component={AuthJoinPage}/>
           <Route name="signin" path="/signin" component={AuthSignInPage}/>
         </Route>
-        <ReactRouter.Redirect from='/' to='/items' />
+        <ReactRouter.Redirect from='/' to='/plans' />
       </Router>
     );
   }
+});
+
+$(document).ready(function() {
+  React.render(<Routes/>, document.body);
 });
 

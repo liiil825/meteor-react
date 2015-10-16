@@ -1,0 +1,59 @@
+.app-head-container
+  background-color: $color-dark1
+  l-clearfix()
+
+.app-head
+  line-height: 50px
+  padding-left: 50px
+
+.app-head-nav
+  line-height: 50px
+  > li
+    width: 250px
+    height: 50px
+    line-height: 50px
+
+    text-align: center
+
+.s-unlogin button
+  margin: 0 10px
+
+.page-container
+  l-container()
+  min-height: 80%
+
+@media (min-width: 640px)
+  .app-head
+    line-height: 40px
+
+  .app-head-nav
+    line-height: 40px
+    l-inline()
+    float: right
+    l-clearfix()
+
+    & > li
+      width: 100px
+      height: 40px
+      line-height: 40px
+
+  .page-container
+    max-height: 80%
+
+  .fa-head-show
+    position: absolute
+    top: 9px
+    right: 39px
+
+    font-size: $font-m2
+    color: rgba($color-bright1, .6)
+    &:hover
+      color: rgba($color-bright1, .9)
+
+  .fa-head-hide
+    display: inline-block
+    padding-top: 9px
+    font-size: $font-m2
+    &:hover
+      color: rgba($color-bright1, .9)
+

@@ -1,16 +1,11 @@
 App = React.createClass({
   render: function () {
-    let appBodyClass = '';
+    var appBodyClass = '';
+      // <div id='container' className={ appBodyClass }>
+      //     { this.props.children }
+      // </div>
 
-    return (
-      <div id='container' className={ appBodyClass }>
-        <h1>Meteor-React</h1>
-        <div>
-          {/* This is where our view components will be rendered */}
-          { this.props.children }
-        </div>
-      </div>
-    );
+    return this.props.children;
   }
 });
 
