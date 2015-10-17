@@ -6,7 +6,7 @@ TodoNewItem = React.createClass({
           name: input.value.trim()
         };
     if (plan.name) {
-      Meteor.call('plans/new', plan, function(err) {
+      Meteor.call('/plans/new', plan, function(err) {
         if (err) console.log(err);
       });
     }

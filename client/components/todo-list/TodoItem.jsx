@@ -10,11 +10,9 @@ TodoItem = React.createClass({
   propTypes: {
     plan: React.PropTypes.object,
     index: React.PropTypes.number,
-    colors: React.PropTypes.array,
-    onSubmit: React.PropTypes.func.isRequired
+    colors: React.PropTypes.array
   },
   toggleHeaderEdit: function(event) {
-    event.preventDefault();
     var isHeadEdit = !this.state.headEdit;
     this.setState({'headEdit': isHeadEdit });
     if (! isHeadEdit) {
@@ -27,9 +25,6 @@ TodoItem = React.createClass({
     if (! isDescEdit ) {
       this.props.plan.describe = this.refs.txtDesc.getDOMNode().value;
     }
-  },
-  selectAllTxt: function(event) {
-    // event.target.setSelectionRange(0, event.target.value.length);
   },
   renderHeader: function() {
     var headClass = "",
@@ -45,12 +40,11 @@ TodoItem = React.createClass({
       <h3>
           <span className={ headClass }>{ this.props.plan.name }</span>
           <i onClick={ this.toggleHeaderEdit } className={ "fa-edit " + headClass }></i>
-          <input ref="txtHeader" name="name" className={ inputClass } onBlur={ this.toggleHeaderEdit } type="text" defaultValue={ this.props.plan.name } onClick={ this.selectAllTxt } />
+          <input ref="txtHeader" name="name" className={ inputClass } onBlur={ this.toggleHeaderEdit } type="text" defaultValue={ this.props.plan.name }/>
       </h3>
     );
   },
   renderItemTabs: function(array) {
-    // Meteor.settings.public.classColors = [];
     if (!array || array.length == 0) return null;
     var colors = this.props.colors;
     var result = array.map(function(item, i) {
@@ -62,43 +56,43 @@ TodoItem = React.createClass({
     return result;
   },
   renderItemDescibe: function() {
-    if (this.state.isOpenOrEdit) {
-      var txtDescClass = "l-hidden",
-          labelClass = "l-hidden";
-      if (this.state.describeEdit) {
-        txtDescClass = "";
-        textarea = this.refs.txtDesc.getDOMNode();
-        textarea.focus();
-        textarea.setSelectionRange(0, textarea.value.length);
-      } else
-        labelClass = "";
-      return (
-        <div>
-          <h4>计划描述<i onClick={ this.toggleDescEdit } className="fa-edit"></i></h4>
-          <label className={labelClass}>
-            { this.props.plan.describe }
-          </label>
-          <textarea ref="txtDesc" name="describe" onBlur={ this.toggleDescEdit } className={txtDescClass} value={ this.props.plan.describe }></textarea>
-        </div>
-      );
-    }
+    if (!this.state.isOpenOrEdit) return;
+
+    var txtDescClass = "l-hidden",
+        labelClass = "l-hidden";
+    if (this.state.describeEdit) {
+      txtDescClass = "";
+      textarea = this.refs.txtDesc.getDOMNode();
+      textarea.focus();
+      textarea.setSelectionRange(0, textarea.value.length);
+    } else
+      labelClass = "";
+    return (
+      <div>
+        <h4>计划描述<i onClick={ this.toggleDescEdit } className="fa-edit"></i></h4>
+        <label className={labelClass}>
+          { this.props.plan.describe }
+        </label>
+        <textarea ref="txtDesc" name="describe" onBlur={ this.toggleDescEdit } className={txtDescClass} value={ this.props.plan.describe }></textarea>
+      </div>
+    );
   },
   renderItemTimes: function() {
     var isOpenOrEdit = this.state.isOpenOrEdit;
-    function renderTime(time) {
+    function renderTime(time, name) {
       return isOpenOrEdit
-              ? <input type="datetime-local" defalutValue={ time } />
+              ? <input type="datetime-local" name={ name } defaultValue={ time } />
               : <label>{ time }</label>;
     }
     return (
       <p className="plan-item-times">
         <sub className="font-small">
           开始时间
-          { renderTime(this.props.plan.startAt) }
+          { renderTime(this.props.plan.startAt, "startAt") }
         </sub>
         <sub className="font-small">
           结束时间
-          { renderTime(this.props.plan.endAt) }
+          { renderTime(this.props.plan.endAt, "endAt") }
         </sub>
       </p>
     );
@@ -117,13 +111,16 @@ TodoItem = React.createClass({
     this.setState({ isOpenOrEdit: true });
     this.state.onFoucs++;
   },
-  savePlan: function(event) {
+  onSubmit: function(event) {
     event.preventDefault();
-    alert('hello');
     var form = event.target;
     console.dir(form);
-  },
-  onSubmit: function(event) {
+    this.props.plan.describe = form.describe.value;
+    this.props.plan.startAt = form.startAt.value;
+    this.props.plan.endAt = form.endAt.value;
+    Meteor.call('/plans/update', this.props.plan, function(err){
+      if (err)  console.log('err ' + id);
+    });
   },
   render: function() {
     var className = "plan-item",
@@ -133,11 +130,13 @@ TodoItem = React.createClass({
       className += " " + colors[index % colors.length ];
     return (
       <li className={ className } onClick={ this.onFocus }>
+        <form onSubmit={ this.onSubmit }>
           { this.renderHeader() }
           { this.renderItemTabs( this.props.plan.types ) }
           { this.renderItemDescibe() }
           { this.renderItemTimes() }
           { this.renderItenButtons() }
+        </form>
       </li>
     );
   }
