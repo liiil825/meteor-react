@@ -1,0 +1,173 @@
+// Flex variation
+//
+// Custom styles for additional flex alignment options.
+
+if $enable-flex
+  // Flex column reordering
+  .l-col-xs-first
+    order: -1
+  .l-col-xs-last
+    order: 1
+
+  +media-breakpoint-up(sm)
+    .l-col-sm-first
+      order: -1
+    .l-col-sm-last
+      order: 1
+  +media-breakpoint-up(md)
+    .l-col-md-first
+      order: -1
+    .l-col-md-last
+      order: 1
+  +media-breakpoint-up(lg)
+    .l-col-lg-first
+      order: -1
+    .l-col-lg-last
+      order: 1
+  +media-breakpoint-up(xl)
+    .l-col-xl-first
+      order: -1
+    .l-col-xl-last
+      order: 1
+
+  // Alignment for every column in row
+  .row-xs-top
+    align-items: flex-start
+  .row-xs-center
+    align-items: center
+  .row-xs-bottom
+    align-items: flex-end
+  +media-breakpoint-up(sm)
+    .row-sm-top
+      align-items: flex-start
+    .row-sm-bottom
+      align-items: flex-end
+
+  +media-breakpoint-up(md)
+    .row-md-top
+      align-items: flex-start
+    .row-md-center
+      align-items: center
+    .row-md-bottom
+      align-items: flex-end
+  +media-breakpoint-up(lg)
+    .row-lg-top
+      align-items: flex-start
+    .row-lg-center
+      align-items: center
+    .row-lg-bottom
+      align-items: flex-end
+
+  +media-breakpoint-up(xl)
+    .row-xl-top
+      align-items: flex-start
+    .row-xl-center
+      align-items: center
+    .row-xl-bottom
+      align-items: flex-end
+
+  // Alignment per column
+  .l-col-xs-top
+    align-self: flex-start
+  .l-col-xs-center
+    align-self: center
+  .l-col-xs-bottom
+    align-self: flex-end
+
+  +media-breakpoint-up(sm)
+    .l-col-sm-top
+      align-self: flex-start
+    .l-col-sm-center
+      align-self: center
+    .l-col-sm-bottom
+      align-self: flex-end
+
+  +media-breakpoint-up(md)
+    .l-col-md-top
+      align-self: flex-start
+    .l-col-md-center
+      align-self: center
+    .l-col-md-bottom
+      align-self: flex-end
+  +media-breakpoint-up(lg)
+    .l-col-lg-top
+      align-self: flex-start
+    .l-col-lg-center
+      align-self: center
+    .l-col-lg-bottom
+      align-self: flex-end
+
+  +media-breakpoint-up(xl)
+    .l-col-xl-top
+      align-self: flex-start
+    .l-col-xl-center
+      align-self: center
+    .l-col-xl-bottom
+      align-self: flex-end
+
+//
+// Variables
+//
+// Grid system
+//
+// Define your custom responsive grid.
+$grid-breakpoints = {
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 34em,
+  // Medium screen / tablet
+  md: 48em,
+  // Large screen / desktop
+  lg: 62em,
+  // Extra large screen / wide desktop
+  xl: 75em
+}
+
+// Number of columns in the grid.
+$grid-columns =               12
+// Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width =          1.5rem
+
+
+// Container sizes
+//
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths = {
+  sm: 34rem,    // 480
+  md: 45rem,    // 720
+  lg: 60rem,    // 960
+  xl: 72.25rem  // 1140
+}
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+.l-container
+  make-container()
+
+  // For each breakpoint, define the maximum width of the container in a media query
+  for $breakpoint, $container-max-width in $container-max-widths
+    +media-breakpoint-up($breakpoint)
+      max-width: $container-max-width
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+.l-container-fluid
+  make-container()
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+.l-row
+  make-row()
+// Columns
+//
+// Common styles for small and large grid columns
+
+make-grid-columns()
+

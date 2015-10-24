@@ -12,11 +12,7 @@ AppHeaderNav = React.createClass({
     if (f) {
       s.__html = Meteor.users.username + "，欢迎您"
       className += " s-login";
-    } else {
-      s.__html = "<span class='font-s2'><button>登陆</button>/<button>注册</button></span>";
-      className += " s-unlogin";
     }
-
     return (
       <span className={ className } dangerouslySetInnerHTML={ s }>
       </span>

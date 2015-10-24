@@ -1,10 +1,15 @@
 TodoItem = React.createClass({
-  getInitialState() {
+  getInitialState: function() {
     return {
       isOpenOrEdit: false,
       onFoucs: 0,
       headEdit: false,
       describeEdit: false
+    };
+  },
+  getDefaultProps: function(){
+    return {
+      isOpenOrEdit: false
     };
   },
   propTypes: {
@@ -32,9 +37,9 @@ TodoItem = React.createClass({
         input = "";
     if (this.state.headEdit) {
       headClass = "l-hidden";
-      input = this.refs.txtHeader.getDOMNode();
-      input.focus();
-      input.setSelectionRange(0, input.value.length);
+      // input = this.refs.txtHeader.getDOMNode();
+      // input.focus();
+      // input.setSelectionRange(0, input.value.length);
     } else inputClass = "l-hidden";
     return (
       <h3>
@@ -56,15 +61,12 @@ TodoItem = React.createClass({
     return result;
   },
   renderItemDescibe: function() {
-    if (!this.state.isOpenOrEdit) return;
+    if (!this.props.isOpenOrEdit) return;
 
     var txtDescClass = "l-hidden",
         labelClass = "l-hidden";
     if (this.state.describeEdit) {
       txtDescClass = "";
-      textarea = this.refs.txtDesc.getDOMNode();
-      textarea.focus();
-      textarea.setSelectionRange(0, textarea.value.length);
     } else
       labelClass = "";
     return (
@@ -73,12 +75,25 @@ TodoItem = React.createClass({
         <label className={labelClass}>
           { this.props.plan.describe }
         </label>
-        <textarea ref="txtDesc" name="describe" onBlur={ this.toggleDescEdit } className={txtDescClass} value={ this.props.plan.describe }></textarea>
+        <textarea ref="txtDesc" name="describe" onBlur={ this.toggleDescEdit } className={txtDescClass} defaultValue={ this.props.plan.describe }></textarea>
       </div>
     );
   },
+  componentDidUpdate: function() {
+    if (this.state.headEdit) {
+      input = this.refs.txtHeader.getDOMNode();
+      input.focus();
+      input.setSelectionRange(0, input.value.length);
+    }
+    if (this.state.describeEdit) {
+      txtDescClass = "";
+      textarea = this.refs.txtDesc.getDOMNode();
+      textarea.focus();
+      textarea.setSelectionRange(0, textarea.value.length);
+    }
+  },
   renderItemTimes: function() {
-    var isOpenOrEdit = this.state.isOpenOrEdit;
+    var isOpenOrEdit = this.props.isOpenOrEdit;
     function renderTime(time, name) {
       return isOpenOrEdit
               ? <input type="datetime-local" name={ name } defaultValue={ time } />
@@ -98,7 +113,7 @@ TodoItem = React.createClass({
     );
   },
   renderItenButtons: function() {
-    if ( this.state.isOpenOrEdit ) {
+    if ( this.props.isOpenOrEdit ) {
       // <button className="btn-right">加入任务</button>
       return (
         <p className="plan-item-buttons">
@@ -108,7 +123,8 @@ TodoItem = React.createClass({
     }
   },
   onFocus: function(event) {
-    this.setState({ isOpenOrEdit: true });
+    debugger;
+    this.props.isOpenOrEdit = true;
     this.state.onFoucs++;
   },
   onSubmit: function(event) {
@@ -123,7 +139,7 @@ TodoItem = React.createClass({
     });
   },
   render: function() {
-    var className = "plan-item",
+    var className = "plan-item l-",
         colors = this.props.colors,
         index = this.props.index;
     if ( colors && colors.length > 0)

@@ -1,6 +1,6 @@
 type-regular()
-  font-family: 'Microsoft YaHei', "Helvetica Neue", Helvetica, Arial, sans-serif
-  font-weight: 400
+  font-family: $font-family-base
+  font-weight: $font-weight-base
   color: $color-default
 
 ellipsized()
@@ -8,37 +8,99 @@ ellipsized()
   text-overflow: ellipsis
   white-space: nowrap
 
-// Large fonts
-font-l3()
-  font-size: $font-l3
-  line-height: $line-height-l3
-font-l2()
-  font-size: $font-l2
-  line-height: $line-height-l2
-font-l1()
-  font-size: $font-l1
-  line-height: $line-height-l1
+//
+// Headings
+//
 
-// Medium fonts
-font-m3()
-  font-size: $font-m3
-  line-height: $line-height-m3
-font-m2()
-  font-size: $font-m2
-  line-height: $line-height-m2
-font-m1()
-  font-size: $font-m1
-  line-height: $line-height-m1
-
-// Small fonts
-font-s3()
-  font-size: $font-s3
-  line-height: $line-height-s3
-font-s2()
-  font-size: $font-s2
-  line-height: $line-height-s2
-font-s1()
-  font-size: $font-s1
-  line-height: $line-height-s1
+h1, h2, h3, h4, h5, h6,
+.el-h1, .el-h2, .el-h3, .el-h4, .el-h5, .el-h6
+  font-family: $headings-font-family
+  font-weight: $headings-font-weight
+  line-height: $headings-line-height
+  color: $headings-color
 
 
+h1, .el-h1,
+h2, .el-h2,
+h3, .el-h3
+  margin-bottom: $headings-margin-bottom
+
+h4, .el-h4,
+h5, .el-h5,
+h6, .el-h6
+  margin-bottom: $headings-margin-bottom
+
+h1, .el-h1
+  font-size: $font-size-h1
+h2, .el-h2
+  font-size: $font-size-h2
+h3, .el-h3
+  font-size: $font-size-h3
+h4, .el-h4
+  font-size: $font-size-h4
+h5, .el-h5
+  font-size: $font-size-h5
+h6, .el-h6
+  font-size: $font-size-h6
+
+.font-lead
+  font-size: $lead-font-size
+  font-weight: $lead-font-weight
+
+
+// Type display classes
+.display-1
+  font-size: $display1-size
+  font-weight: $display1-weight
+
+.display-2
+  font-size: $display2-size
+  font-weight: $display2-weight
+
+.display-3
+  font-size: $display3-size
+  font-weight: $display3-weight
+
+.display-4
+  font-size: $display4-size
+  font-weight: $display4-weight
+
+
+
+//
+// Horizontal rules
+//
+
+hr
+  margin-top: $spacer-y
+  margin-bottom: $spacer-y
+  border: 0
+  border-top: $hr-border-width solid $hr-border-color
+
+
+small,
+.el-small
+  font-size: 80%
+  font-weight: normal
+
+mark,
+.el-mark
+  padding: .2em
+  background-color: $state-warning-bg
+
+
+//
+// Figures
+//
+
+.el-figure
+  // Ensures the caption's text aligns with the image.
+  display: inline-block
+
+  > img
+    img-responsive()
+    line-height: 1
+    margin-bottom: ($spacer-y / 2)
+.figure-caption
+  font-size: 90%
+  color: $gray-light

@@ -22,29 +22,38 @@
   &.l-show
     background-color: $color-dark1
 
-
   input[type=radio]
     display: none
 
   li
-    padding: 8px
+    display: table-cell
+    vertical-align: middle
+    height: 30px
+    padding: 0 5px
+
+  label
+    margin: 0
 
   .fa-plus-circle
-    font-size: $heading-size3
     color: $color-bright1
     &:hover
       color: lighten($color-bright1, 30)
   .fa-search
-    font-size: $heading-size3
     color: $color-bright1
     &:hover
       color: lighten($color-bright1, 30)
+
 .page-plan-items
   l-clearfix()
   li
-    width: 210px
-    margin-left: 55px
     float: left
+    width: 90%
+    margin: 0 5% 30px 5%
+    padding: .8rem
+    border-radius: .3rem
+
+  .fa-edit
+    margin-left: .5rem
 
 @media screen and (min-width: 640px)
   .plan-new-container
@@ -54,9 +63,18 @@
       width: 420px
   .page-plan-items
     li
-      margin-left: 40px
-      width: 420px
+      width: 48%
+      margin: 0 0 30px 0
+    li:nth-child(2n+1)
+      margin: 0 4% 30px 0
 
 @media screen and (min-width: 960px)
+  .page-plan-items
+    li
+      width: 44%
+    li:nth-child(2n+1)
+      margin: 0 2% 30px 4%
+    li:nth-child(2n)
+      margin: 0 4% 30px 2%
   .page-container
     l-center()

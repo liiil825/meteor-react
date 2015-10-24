@@ -24,12 +24,6 @@ TodoNewItem = React.createClass({
                 <i className="fa-plus-circle"></i>
               </label>
             </li>
-            <li>
-              <input id="checkPlanSearch" name="inputType" className="l-hidden" type="radio" value="1" onChange={ this.onChange } className="plan-search" />
-              <label htmlFor="checkPlanSearch">
-                <i className="fa-search"></i>
-              </label>
-            </li>
           </ul>
         </form>
       </div>

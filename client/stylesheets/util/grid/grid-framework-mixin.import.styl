@@ -1,0 +1,33 @@
+// Framework grid generation
+//
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `$grid-columns`.
+
+grid-column-float()
+  if !$enable-flex
+    float: left
+
+make-grid-columns($columns = $grid-columns, $gutter = $grid-gutter-width, $breakpoints = $grid-breakpoints)
+  // Common properties for all breakpoints
+  for $breakpoint in $breakpoints
+    for $i in (1 .. $columns)
+      .l-col-{$breakpoint}-{$i}
+        position: relative
+        // Prevent columns from collapsing when empty
+        min-height: 1px
+        // Inner gutter via padding
+        padding-left: $gutter
+        padding-right: $gutter
+
+    +media-breakpoint-up($breakpoint)
+      // Work around cross-media @extend (https://github.com/sass/sass/issues/1050)
+      for $i in (1 .. $columns)
+        .l-col-{$breakpoint}-{$i}
+          grid-column-float()
+          make-col-span($i, $columns);
+
+      for $modifier in pull push offset
+        for $i in (0 .. $columns)
+          .l-col-{$breakpoint}-{$modifier}-{$i}
+            make-col-modifier($modifier, $i, $columns)
+

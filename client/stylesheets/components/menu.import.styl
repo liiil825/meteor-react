@@ -3,6 +3,7 @@
   l-clearfix()
 
 .app-head
+  float: left
   line-height: 50px
   padding-left: 50px
 
@@ -21,6 +22,11 @@
 .page-container
   l-container()
   min-height: 80%
+
+@media (min-width: 320px)
+  .app-head-nav
+    & > li
+      width: 100%
 
 @media (min-width: 640px)
   .app-head
@@ -45,7 +51,6 @@
     top: 9px
     right: 39px
 
-    font-size: $font-m2
     color: rgba($color-bright1, .6)
     &:hover
       color: rgba($color-bright1, .9)
@@ -53,7 +58,5 @@
   .fa-head-hide
     display: inline-block
     padding-top: 9px
-    font-size: $font-m2
     &:hover
       color: rgba($color-bright1, .9)
-

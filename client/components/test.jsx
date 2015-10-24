@@ -77,32 +77,40 @@ Test = React.createClass({
     console.log( event.keyCode );
   },
   render: function() {
-    // <div className="test-app" onMouseMove={ this.onMouseMove }><p refs="move" className="move" onMouseDown={ this.onMouseDown } onMouseUp={ this.onMouseUp }>Hello World</p></div>
     return (
-      <div className="test-app">
-        <ul onClick={ this.onClick }>
-          <li>l1</li>
-          <li>l2</li>
-          <li>l3</li>
-          <li>l4</li>
-          <li>l5</li>
-        </ul>
-        <form>
-          <input type="tel" name="b" value="50" /> +
-          <input onKeyUp={ this.onKeyUp } type="number" name="a" value="10" /> =
-          <output name="result"></output>
-        </form>
-        <div>Choose a browser from this list:</div>
-        <input list="browsers" />
-        <datalist id="browsers">
-          <option value="Chrome" />
-          <option value="Firefox" />
-          <option value="Internet Explorer" />
-          <option value="Opera" />
-          <option value="Safari" />
-        </datalist>
+      <div className="parent">
+        <aside>aside</aside>
+        <article>article</article>
       </div>
     );
-  }
+  },
+  // render: function() {
+  //   // <div className="test-app" onMouseMove={ this.onMouseMove }><p refs="move" className="move" onMouseDown={ this.onMouseDown } onMouseUp={ this.onMouseUp }>Hello World</p></div>
+  //   return (
+  //     <div className="test-app">
+  //       <ul onClick={ this.onClick }>
+  //         <li>l1</li>
+  //         <li>l2</li>
+  //         <li>l3</li>
+  //         <li>l4</li>
+  //         <li>l5</li>
+  //       </ul>
+  //       <form>
+  //         <input type="tel" name="b" value="50" /> +
+  //         <input onKeyUp={ this.onKeyUp } type="number" name="a" value="10" /> =
+  //         <output name="result"></output>
+  //       </form>
+  //       <div>Choose a browser from this list:</div>
+  //       <input list="browsers" />
+  //       <datalist id="browsers">
+  //         <option value="Chrome" />
+  //         <option value="Firefox" />
+  //         <option value="Internet Explorer" />
+  //         <option value="Opera" />
+  //         <option value="Safari" />
+  //       </datalist>
+  //     </div>
+  //   );
+  // }
 });
 

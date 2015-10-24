@@ -1,0 +1,36 @@
+l-container($pageWidth = $page-width, $marginTop = 0, $marginBottom = 0, $minWidth = 0)
+  if $minWidth == 0
+    width: 90%
+    max-width: $pageWidth
+  else
+    width: 90%
+    max-width: $pageWidth
+  margin: $marginTop auto $marginBottom
+  // @media screen and (min-width: $pageWidth)
+  //   min-width: $pageWidth
+
+l-inline($isFloat = 1)
+  > li
+    if $isFloat == 1
+      float: left
+    else
+      display: inline-block
+      *display: inline
+
+l-center()
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate3d(-50%, -50%, 0)
+
+l-clearfix()
+  *zoom: 1
+
+  &:before,
+  &:after
+    content: " "
+    display: table
+
+  &:after
+    clear: both
+
