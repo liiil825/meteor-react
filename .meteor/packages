@@ -27,3 +27,5 @@ npm-container
 stylus
 accounts-password
 mquandalle:jeet
+meteorflux:dispatcher
+izzilab:material-ui

@@ -1,4 +1,4 @@
-TodoNewItem = React.createClass({
+PlanNew = React.createClass({
   onSubmit: function(event) {
     event.preventDefault();
     var input = event.target.planNew,

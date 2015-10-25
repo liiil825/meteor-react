@@ -1,19 +1,14 @@
-TodoItem = React.createClass({
+PlanItem = React.createClass({
   getInitialState: function() {
     return {
-      isOpenOrEdit: false,
+      isEditing: false,
       onFoucs: 0,
       headEdit: false,
       describeEdit: false
     };
   },
-  getDefaultProps: function(){
-    return {
-      isOpenOrEdit: false
-    };
-  },
   propTypes: {
-    plan: React.PropTypes.object,
+    an: React.PropTypes.object,
     index: React.PropTypes.number,
     colors: React.PropTypes.array
   },
@@ -61,7 +56,7 @@ TodoItem = React.createClass({
     return result;
   },
   renderItemDescibe: function() {
-    if (!this.props.isOpenOrEdit) return;
+    if (!this.state.isEditing) return;
 
     var txtDescClass = "l-hidden",
         labelClass = "l-hidden";
@@ -93,10 +88,10 @@ TodoItem = React.createClass({
     }
   },
   renderItemTimes: function() {
-    var isOpenOrEdit = this.props.isOpenOrEdit;
+    var isEditing = this.state.isEditing;
     function renderTime(time, name) {
-      return isOpenOrEdit
-              ? <input type="datetime-local" name={ name } defaultValue={ time } />
+      return isEditing
+              ? <input type="date" name={ name } defaultValue={ time } />
               : <label>{ time }</label>;
     }
     return (
@@ -105,15 +100,11 @@ TodoItem = React.createClass({
           开始时间
           { renderTime(this.props.plan.startAt, "startAt") }
         </sub>
-        <sub className="font-small">
-          结束时间
-          { renderTime(this.props.plan.endAt, "endAt") }
-        </sub>
       </p>
     );
   },
   renderItenButtons: function() {
-    if ( this.props.isOpenOrEdit ) {
+    if ( this.state.isEditing ) {
       // <button className="btn-right">加入任务</button>
       return (
         <p className="plan-item-buttons">
@@ -122,10 +113,8 @@ TodoItem = React.createClass({
       );
     }
   },
-  onFocus: function(event) {
-    debugger;
-    this.props.isOpenOrEdit = true;
-    this.state.onFoucs++;
+  handleClick: function(event) {
+    this.setState({ isEditing: true });
   },
   onSubmit: function(event) {
     event.preventDefault();
@@ -133,8 +122,7 @@ TodoItem = React.createClass({
     console.dir(form);
     this.props.plan.describe = form.describe.value;
     this.props.plan.startAt = form.startAt.value;
-    this.props.plan.endAt = form.endAt.value;
-    Meteor.call('/plans/update', this.props.plan, function(err){
+    Meteor.call('/plans/reset', this.props.plan, function(err){
       if (err)  console.log('err ' + id);
     });
   },
@@ -145,7 +133,7 @@ TodoItem = React.createClass({
     if ( colors && colors.length > 0)
       className += " " + colors[index % colors.length ];
     return (
-      <li className={ className } onClick={ this.onFocus }>
+      <li className={ className } onClick={ this.handleClick } >
         <form onSubmit={ this.onSubmit }>
           { this.renderHeader() }
           { this.renderItemTabs( this.props.plan.types ) }
