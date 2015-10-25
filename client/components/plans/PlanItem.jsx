@@ -124,7 +124,8 @@ PlanItem = React.createClass({
     this.props.plan.startAt = form.startAt.value;
     Meteor.call('/plans/reset', this.props.plan, function(err){
       if (err)  console.log('err ' + id);
-    });
+      this.setState({ isEditing: false });
+    }.bind(this));
   },
   render: function() {
     var className = "plan-item l-",

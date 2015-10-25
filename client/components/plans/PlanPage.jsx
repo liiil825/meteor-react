@@ -17,12 +17,6 @@ PlanPage = React.createClass({
     });
     return this.props.plans;
   },
-  closeItem: function(event) {
-    debugger;
-    this.props.plans.forEach(function(item) {
-      item.props.isOpenOrEdit = false;
-    });
-  },
   render: function() {
     return (
       <div className="page-container" onClick={ this.closeItem }>
