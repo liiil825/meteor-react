@@ -109,9 +109,13 @@ PlanItem = React.createClass({
       return (
         <p className="plan-item-buttons">
           <button type="submit" className="btn-left">完成</button>
+          <button type="button" onClick={ this.handleRemove } className="btn-right">删除</button>
         </p>
       );
     }
+  },
+  handleRemove: function(event) {
+    Meteor.call('/plans/del', this.props.plan._id);
   },
   handleClick: function(event) {
     this.setState({ isEditing: true });

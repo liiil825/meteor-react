@@ -11,6 +11,11 @@ Meteor.methods({
     if (plan._id) {
       PlansCollection.update(plan._id, plan);
     }
+  },
+  '/plans/del': function(id) {
+    if (id) {
+      PlansCollection.remove({ _id: id });
+    }
   }
 });
 
