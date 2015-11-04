@@ -40,7 +40,6 @@ AppHeaderNav = React.createClass({
     );
   },
   toggleSwitch: function(event) {
-    event.preventDefault();
     var s = this.state.hidden;
     this.setState({ hidden: !s });
   },

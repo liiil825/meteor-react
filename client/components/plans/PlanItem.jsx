@@ -1,4 +1,25 @@
+injectTapEventPlugin();
+
+var {
+  AppCanvas,
+  AppBar,
+  Styles,
+  RaisedButton,
+  DatePicker
+} = MUI;
+var { ThemeManager, LightRawTheme } = Styles;
+
 PlanItem = React.createClass({
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager(LightRawTheme)
+    };
+  },
+
   getInitialState: function() {
     return {
       isEditing: false,
@@ -91,7 +112,8 @@ PlanItem = React.createClass({
     var isEditing = this.state.isEditing;
     function renderTime(time, name) {
       return isEditing
-              ? <input type="date" name={ name } defaultValue={ time } />
+              // ? <input type="date" name={ name } defaultValue={ time } />
+              ? <DatePicker name={ name } hintText={ time } defaultValue={ time } mode="landscape" />
               : <label>{ time }</label>;
     }
     return (
@@ -108,7 +130,7 @@ PlanItem = React.createClass({
       // <button className="btn-right">加入任务</button>
       return (
         <p className="plan-item-buttons">
-          <button type="submit" className="btn-left">完成</button>
+          <button type="submit" className="btn-left">提交</button>
           <button type="button" onClick={ this.handleRemove } className="btn-right">删除</button>
         </p>
       );
@@ -123,7 +145,6 @@ PlanItem = React.createClass({
   onSubmit: function(event) {
     event.preventDefault();
     var form = event.target;
-    console.dir(form);
     this.props.plan.describe = form.describe.value;
     this.props.plan.startAt = form.startAt.value;
     Meteor.call('/plans/reset', this.props.plan, function(err){
